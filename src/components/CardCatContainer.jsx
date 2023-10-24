@@ -4,20 +4,23 @@ import { Link } from 'react-router-dom'
 import './CardCatContainer.css'
 
 const CardCatContainer = () => {
-    const cat = ['Plantas', 'Semillas', 'Herramientas', 'Macetas', 'Accesorios']
-    let i = -1
+    const cat = ['Plantas', 'Semillas', 'Herramientas', 'Macetas', 'Accesorios'];
+    let i = -1;
     return (
-        <>
+        <div className="productos-container">
             {cat.map(categ => {
-                i++
+                i++;
                 return (
                     <Link key={i} to={`productos/${categ.toLowerCase()}`} >
-                        <CardCategory key={i} category={categ} img={fotoPlanta} />
+                        <div class="caja">
+                        <CardCategory key={i} category={categ} /* img={fotoPlanta}   */ />
+                        </div>
                     </Link >
-                )
+                );
             })}
-        </>
-    )
+        </div>
+    );
 }
 
-export default CardCatContainer
+export default CardCatContainer;
+

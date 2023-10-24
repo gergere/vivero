@@ -3,7 +3,8 @@ import './CardCategory.css'
 
 const CardCategory = ({category, img}) => {
   return (
-    <div style={{ backgroundImage: `url(${img})` }}>
+    <div class="fondo"  style={{ backgroundImage: `url(${img})` }} >
+   
         <h4>{category}</h4>
     </div>
   )

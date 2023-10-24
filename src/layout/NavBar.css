@@ -3,6 +3,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* background-color: rgb(86, 130, 9); */
+   background-color: darkseagreen;
+    
 }
 
 #navbarDiv ul {
@@ -14,4 +17,11 @@
 
 #navbarDiv ul li {
     margin: 10px;
+     color: rgb(2, 39, 2);
+
 }
+
+#navbarDiv ul li:hover {
+    color: rgb(219, 243, 219);
+}
+
