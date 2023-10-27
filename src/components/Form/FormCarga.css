@@ -1,0 +1,40 @@
+#contenedorPrincipalCarga{
+    margin: 5% auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 5%;
+}
+
+#contenedorPrincipalCarga a{
+    height: 400px;
+    width: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    border-radius: 30px;
+    background-color: darkseagreen;
+    margin: auto;
+}
+
+#contenedorPrincipalCarga a:hover{
+    transition: transform 0.3s;
+    transform: scale(1.2);
+}
+
+#contenedorPrincipalCarga h4{
+    color: black;
+    background-color: darkseagreen;
+    width: 300px;
+}
+
+#contenedorPlantas{
+    background-image: url(src/assets/plantaSemilla.jpeg);
+    grid-column: 2 / 3;
+}
+
+#contenedorProductos{
+    background-image: url(src/assets/fotoProductos.jpeg);
+    grid-column: 3 / 4;
+}

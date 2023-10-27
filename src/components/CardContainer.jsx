@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom'
 //import { getByCategory } from '../services/bbdd'
 import './CardContainer.css'
+import { Link } from 'react-router-dom'
 
 
 const CardContainer = () => {
@@ -49,10 +50,10 @@ const CardContainer = () => {
             
           </div>
           <div className="botones">
-            <button>Agregar</button>
+            <Link to="/formCarga"><button>Agregar</button></Link>
             <button>Modificar</button>
             <button>Eliminar</button>
-            </div>
+          </div>
       </>
     )
 }
