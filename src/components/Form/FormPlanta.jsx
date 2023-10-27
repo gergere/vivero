@@ -1,6 +1,37 @@
+import { useState } from "react"
 import "./FormPlanta.css"
 
 const FormPlanta = () => {
+
+    const [value, setValue] = useState({
+        nombre: '',
+        esSemilla: false,
+        especie: '',
+        genero: '',
+        cantidad: '',
+        precio: '',
+        imagen: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setValue((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const handleCheckChange = (e) => {
+        setValue((prev) => ({
+            ...prev,
+            esSemilla : e.target.checked
+        }))
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(value)
+    }
 
     return (
 
@@ -12,42 +43,42 @@ const FormPlanta = () => {
                 <div id="contenedorInputsPlanta">
 
                     <div id="categoria">
-                        <input type="text" placeholder="Nombre"/>
+                        <input type="text" name="nombre" placeholder="Nombre" onChange={handleChange} value={value.nombre}/>
                     </div>
 
                     <div id="categoriaSemilla">
                         <label>Semilla</label>
-                        <input type="checkbox"/>
+                        <input type="checkbox" name="esSemilla" onChange={handleCheckChange} value={value.esSemilla}/>
                     </div>
 
 
                     <div id="categoria">
-                        <input type="text" placeholder="Especie"/>
+                        <input type="text" name="especie" placeholder="Especie" onChange={handleChange} value={value.especie}/>
                     </div>
 
                     <div id="categoria">
-                        <input type="text" placeholder="Genero"/>
+                        <input type="text" name="genero" placeholder="Genero" onChange={handleChange} value={value.genero}/>
                     </div>
 
                     <div id="categoria">
-                        <input type="number" placeholder="Cantidad"/>
+                        <input type="number" name="cantidad" placeholder="Cantidad" onChange={handleChange} value={value.cantidad}/>
                     </div>
 
                     <div id="categoria">
-                        <input type="number" placeholder="Precio" />
+                        <input type="number" name="precio" placeholder="Precio"  onChange={handleChange} value={value.precio}/>
                     </div>
 
                     <div id="categoriaImagen">
-                        <label for="imagen">Presione AQUI para cargar una imagen</label>
-                        <input id="imagen" type="file" display="none"/>
+                        <label htmlFor="imagen">Presione AQUI para cargar una imagen</label>
+                        <input id="imagen" name="imagen" type="file" display="none" onChange={handleChange} value={value.imagen}/>
                     </div>
 
-                    <button>CARGAR</button>
+                    <button onClick={handleSubmit}>CARGAR</button>
 
                 </div>
 
             </fieldset>
-        
+
         </form>
 
     )

@@ -21,7 +21,7 @@
     margin: auto;
     margin-top: 5%;
     margin-bottom: 5%;
-    background-image: url(src/assets/plantaSemilla.jpeg);
+    background-image: url(../../assets/plantaSemilla.jpeg);
     background-position: center;
     background-size: cover;
     border-radius: 15px;
@@ -93,8 +93,8 @@
     background-color: darkseagreen;
     font-weight: 650;
     color: black;
-    
-    
+
+
 }
 
 #categoriaSemilla{

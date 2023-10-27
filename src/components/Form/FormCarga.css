@@ -12,7 +12,7 @@
     background-position: center;
     display: flex;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
     border-radius: 30px;
     background-color: darkseagreen;
     margin: auto;
@@ -30,11 +30,11 @@
 }
 
 #contenedorPlantas{
-    background-image: url(src/assets/plantaSemilla.jpeg);
+    background-image: url(../../assets/plantaSemilla.jpeg);
     grid-column: 2 / 3;
 }
 
 #contenedorProductos{
-    background-image: url(src/assets/fotoProductos.jpeg);
+    background-image: url(../../assets/fotoProductos.jpeg);
     grid-column: 3 / 4;
 }

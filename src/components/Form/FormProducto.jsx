@@ -1,23 +1,47 @@
+import { useState } from "react"
 import "./FormProducto.css"
 
 const FormProducto = () => {
 
+    const [value, setValue] = useState({
+        nombre: '',
+        producto:'',
+        caracteristicas: '',
+        descripcion: '',
+        cantidad: '',
+        precio: '',
+        imagen: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setValue((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(value)
+    }
+
     return (
 
         <form id='formProducto'>
-            
+
             <fieldset id='contenedorCargaProducto'>
 
                 <h2>Carga de Datos para Productos</h2>
 
                 <div id="contenedorInputsProducto">
 
-                    <div class="categoriaProducto">
-                        <input type="text" placeholder="Nombre"/>
+                    <div className="categoriaProducto">
+                        <input type="text" placeholder="Nombre" name="nombre" onChange={handleChange} value={value.nombre} />
                     </div>
 
-                    <div class="categoriaProducto">
-                        <select name="Producto">
+                    <div className="categoriaProducto">
+                        <select name="producto" onChange={handleChange} value={value.producto}>
                             <option value="">Tipo de producto</option>
                             <option value="Herramientas">Herramientas</option>
                             <option value="Macetas">Macetas</option>
@@ -26,33 +50,33 @@ const FormProducto = () => {
                     </div>
 
 
-                    <div class='categoriaCargaDescripcion' >
-                        <textarea placeholder="Caracteristicas"/>
+                    <div className='categoriaCargaDescripcion' >
+                        <textarea placeholder="Caracteristicas" name="caracteristicas" onChange={handleChange} value={value.caracteristicas}/>
                     </div>
 
-                    <div class='categoriaCargaDescripcion' >
-                        <textarea type="text" placeholder="Descripcion"/>
+                    <div className='categoriaCargaDescripcion' >
+                        <textarea type="text" placeholder="Descripcion" name="descripcion" onChange={handleChange} value={value.descripcion}/>
                     </div>
 
-                    <div class="categoriaProducto">
-                        <input type="number" placeholder="Cantidad" />
+                    <div className="categoriaProducto">
+                        <input type="number" placeholder="Cantidad" name="cantidad" onChange={handleChange} value={value.cantidad}/>
                     </div>
 
-                    <div class="categoriaProducto">
-                        <input type="number" placeholder="Precio"/>
+                    <div className="categoriaProducto">
+                        <input type="number" placeholder="Precio" name="precio" onChange={handleChange} value={value.precio}/>
                     </div>
 
                     <div id="categoriaImagen">
-                        <label for="imagen">Presione AQUI para cargar una imagen</label>
-                        <input id="imagen" type="file" display="none"/>
+                        <label htmlFor="imagen">Presione AQUI para cargar una imagen</label>
+                        <input id="imagen" type="file" display="none" name="imagen" onChange={handleChange} value={value.imagen}/>
                     </div>
 
-                    <button>CARGAR</button>
+                    <button onClick={handleSubmit}>CARGAR</button>
 
                 </div>
 
             </fieldset>
-        
+
         </form>
 
     )
