@@ -1,4 +1,4 @@
-import CardCategory from './cardCategory'
+import CardCategory from './CardCategory'
 import { Link } from 'react-router-dom'
 import './CardCatContainer.css'
 
