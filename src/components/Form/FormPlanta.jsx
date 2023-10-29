@@ -1,7 +1,7 @@
 import { useState } from "react"
 import "./FormPlanta.css"
 import { setProducto } from "../../services/bbdd"
-import { swalOk } from "../../services/swal"
+import { swalError, swalOk } from "../../services/swal"
 import { rutas } from "../../consts/consts"
 
 const FormPlanta = () => {
@@ -36,12 +36,12 @@ const FormPlanta = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setProducto(value, rutas.producto)
-        .then((res) => {
-            swalOk()
-            setValue(defaultValue)
-            console.log(res)
-        })
-    .catch(error => console.error('Error al cargar la planta: ', error))
+            .then((res) => {
+                swalOk()
+                setValue(defaultValue)
+                console.log(res)
+            })
+            .catch(error => swalError(error))
     }
 
     return (

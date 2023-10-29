@@ -8,15 +8,10 @@
 .caja{
     border-radius: 50px;
     background-color: darkseagreen;
-   
-
+    transition: transform 0.3s;
 }
 
 .caja:hover{
-    background-image: url(../assets/fotoPlanta.jpg);
-    background-position: center;
-    background-size: cover;
-    transition: transform 0.3s;
-    transform: scale(1.2);
+    transform: scale(1.03);
 }
 

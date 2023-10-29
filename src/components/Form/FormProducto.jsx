@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./FormProducto.css"
 import { setProducto } from "../../services/bbdd"
 import { rutas } from "../../consts/consts"
-import { swalOk } from "../../services/swal"
+import { swalError, swalOk } from "../../services/swal"
 
 const FormProducto = () => {
 
@@ -34,7 +34,7 @@ const FormProducto = () => {
                 setValue(defaultValue)
                 console.log(res)
             })
-        .catch(error => console.error('Error al cargar el producto: ', error))
+        .catch(error => swalError(error))
     }
 
     return (
