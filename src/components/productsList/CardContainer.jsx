@@ -1,61 +1,67 @@
-//import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-//import { getByCategory } from '../services/bbdd'
+import { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { getByCategory } from '../../services/bbdd'
+import { swalError } from '../../services/swal'
 import './CardContainer.css'
-import { Link } from 'react-router-dom'
+import CardProduct from './CardProduct'
+import ProductDetail from './ProductDetail'
 
 
 const CardContainer = () => {
 
-    //const [data, setData] = useState([])
-    const { cat } = useParams()
+  const [data, setData] = useState([])
+  const [selected, setSelected] = useState(null)
+  const { cat } = useParams()
 
-    // useEffect(() => {
-    //     getByCategory()
-    //         .then((data)=>setData(data))
-    // }, [])
+  useEffect(() => {
+    getByCategory()
+      .then((res) => setData(res))
+      .catch((error) => swalError(error))
+  }, [])
+
+  const handleClick = (prod) => {
+    setSelected(prod)
+  }
+
+  const handleClose = () => {
+    setSelected(null)
+  }
 
   return (
-      <>  
-          <h1>{cat}</h1>
-          <div className="contenedor">
-            <div><h4>Planta 1</h4> 
-            <div className="imagen1"></div>
-            </div>
-            <div><h4>Planta 2</h4>
-            <div className="imagen2"></div>
-            </div>
-            <div><h4>Planta 3</h4>
-            <div className="imagen3"></div>
-            </div>
-            <div><h4>Planta 4</h4>
-            <div className="imagen4"></div>
-            </div>
-            <div><h4>Planta 5</h4>
-            <div className="imagen5"></div>
-            </div>
-            <div><h4>Planta 6</h4>
-            <div className="imagen6"></div>
-            </div> 
-            <div><h4>Planta 7</h4>
-            <div className="imagen7"></div>
-            </div>
-            <div><h4>Planta 8</h4>
-            <div className="imagen8"></div>
-            </div>
-            <div><h4>Planta 9</h4>
-            <div className="imagen9"></div>
-            </div>     
-
-            
-          </div>
-          <div className="botones">
-            <Link to="/formCarga"><button>Agregar</button></Link>
-            <button>Modificar</button>
-            <button>Eliminar</button>
-          </div>
-      </>
-    )
+    <>
+      {
+        data.length === 0 ? (
+          <>
+            <h1>{cat.toUpperCase()}</h1>
+            <h3>No hay productos en esta categoría</h3>
+          </>
+        ) : (
+          <>
+            {
+              selected != null ? (
+                <ProductDetail key={selected.id} prod={selected} onClose={handleClose} />
+              ) : (
+                <>
+                  <h1>{cat.toUpperCase()}</h1>
+                  <div className="contenedor">
+                    {
+                      data.map((prod) => (
+                        <CardProduct key={prod.id} producto={prod} onClick={handleClick} />
+                      ))
+                    }
+                  </div>
+                  <div className="botones">
+                    <Link to="/formCarga"><button>Agregar</button></Link>
+                    <button>Modificar</button>
+                    <button>Eliminar</button>
+                  </div>
+                </>
+              )
+            }
+          </>
+        )
+      }
+    </>)
 }
 
 export default CardContainer

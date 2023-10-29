@@ -8,3 +8,12 @@ export const swalOk = () => {
         confirmButtonText: '👍'
     })
 }
+
+export const swalError = (msj) => {
+    Swal.fire({
+        title: 'Error!',
+        icon: 'error',
+        text: `Hubo un error procesando la información: ${msj}`,
+        confirmButtonText: '😒'
+    })
+}
