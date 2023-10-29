@@ -1,9 +1,12 @@
 import { useState } from "react"
 import "./FormPlanta.css"
+import { setProducto } from "../../services/bbdd"
+import { swalOk } from "../../services/swal"
+import { rutas } from "../../consts/consts"
 
 const FormPlanta = () => {
 
-    const [value, setValue] = useState({
+    const defaultValue = {
         nombre: '',
         esSemilla: false,
         especie: '',
@@ -11,7 +14,9 @@ const FormPlanta = () => {
         cantidad: '',
         precio: '',
         imagen: ''
-    })
+    }
+
+    const [value, setValue] = useState(defaultValue)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -30,7 +35,13 @@ const FormPlanta = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(value)
+        setProducto(value, rutas.producto)
+        .then((res) => {
+            swalOk()
+            setValue(defaultValue)
+            console.log(res)
+        })
+    .catch(error => console.error('Error al cargar la planta: ', error))
     }
 
     return (

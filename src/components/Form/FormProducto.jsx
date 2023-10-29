@@ -1,9 +1,12 @@
 import { useState } from "react"
 import "./FormProducto.css"
+import { setProducto } from "../../services/bbdd"
+import { rutas } from "../../consts/consts"
+import { swalOk } from "../../services/swal"
 
 const FormProducto = () => {
 
-    const [value, setValue] = useState({
+    const defaultValue = {
         nombre: '',
         producto:'',
         caracteristicas: '',
@@ -11,7 +14,9 @@ const FormProducto = () => {
         cantidad: '',
         precio: '',
         imagen: ''
-    })
+    }
+
+    const [value, setValue] = useState(defaultValue)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -21,9 +26,15 @@ const FormProducto = () => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(value)
+        setProducto(value, rutas.producto)
+            .then((res) => {
+                swalOk()
+                setValue(defaultValue)
+                console.log(res)
+            })
+        .catch(error => console.error('Error al cargar el producto: ', error))
     }
 
     return (
