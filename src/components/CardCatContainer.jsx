@@ -1,5 +1,4 @@
 import CardCategory from './cardCategory'
-// import fotoPlanta from '../assets/fotoPlanta.jpg'
 import { Link } from 'react-router-dom'
 import './CardCatContainer.css'
 
@@ -13,7 +12,7 @@ const CardCatContainer = () => {
                 return (
                     <Link key={i} to={`productos/${categ.toLowerCase()}`} >
                         <div className="caja">
-                        <CardCategory key={i} category={categ} /* img={fotoPlanta}   */ />
+                        <CardCategory key={i} category={categ} img={categ.toLowerCase()} />
                         </div>
                     </Link >
                 );

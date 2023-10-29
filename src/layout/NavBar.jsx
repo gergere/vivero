@@ -14,6 +14,7 @@ const NavBar = () => {
                 <Link to='/productos/herramientas'><li>Herramientas</li></Link>
                 <Link to='/productos/macetas'><li>Macetas</li></Link>
                 <Link to='/productos/accesorios'><li>Accesorios</li></Link>
+                <Link to='/formCarga'><li>Cargar Productos</li></Link>
             </ul>
         </div>
     )
