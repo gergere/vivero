@@ -1,22 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./FormProducto.css"
-import { setProducto } from "../../services/bbdd"
+import { getProductoById, setProducto } from "../../services/bbdd"
 import { rutas } from "../../consts/consts"
 import { swalError, swalOk } from "../../services/swal"
+import { useParams } from "react-router-dom"
 
 const FormProducto = () => {
 
-    const defaultValue = {
+    const { id } = useParams()
+    const [value, setValue] = useState({
         nombre: '',
-        producto:'',
+        producto: '',
         caracteristicas: '',
         descripcion: '',
         cantidad: '',
         precio: '',
         imagen: ''
-    }
-
-    const [value, setValue] = useState(defaultValue)
+    })
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -28,14 +28,28 @@ const FormProducto = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setProducto(value, rutas.producto)
-            .then((res) => {
-                swalOk()
-                setValue(defaultValue)
-                console.log(res)
-            })
-        .catch(error => swalError(error))
+        // si id existe es porque estamos editando un producto que ya existe
+        if (id) {
+            updateProducto(value, rutas.productos)
+        // sino creamos un producto nuevo
+        } else {
+            setProducto(value, rutas.productos)
+                .then((res) => {
+                    swalOk()
+                    setValue(defaultValue)
+                    console.log(res)
+                })
+                .catch(error => swalError(error))
+        }
     }
+
+    useEffect(() => {
+        if (id) {
+            getProductoById(id).then((res) => {
+                setValue(JSON.parse(res))
+            })
+        }
+    }, [id, setValue])
 
     return (
 
@@ -62,24 +76,24 @@ const FormProducto = () => {
 
 
                     <div className='categoriaCargaDescripcion' >
-                        <textarea placeholder="Caracteristicas" name="caracteristicas" onChange={handleChange} value={value.caracteristicas}/>
+                        <textarea placeholder="Caracteristicas" name="caracteristicas" onChange={handleChange} value={value.caracteristicas} />
                     </div>
 
                     <div className='categoriaCargaDescripcion' >
-                        <textarea type="text" placeholder="Descripcion" name="descripcion" onChange={handleChange} value={value.descripcion}/>
+                        <textarea type="text" placeholder="Descripcion" name="descripcion" onChange={handleChange} value={value.descripcion} />
                     </div>
 
                     <div className="categoriaProducto">
-                        <input type="number" placeholder="Cantidad" name="cantidad" onChange={handleChange} value={value.cantidad}/>
+                        <input type="number" placeholder="Cantidad" name="cantidad" onChange={handleChange} value={value.cantidad} />
                     </div>
 
                     <div className="categoriaProducto">
-                        <input type="number" placeholder="Precio" name="precio" onChange={handleChange} value={value.precio}/>
+                        <input type="number" placeholder="Precio" name="precio" onChange={handleChange} value={value.precio} />
                     </div>
 
                     <div id="categoriaImagen">
                         <label htmlFor="imagen">Presione AQUI para cargar una imagen</label>
-                        <input id="imagen" type="file" display="none" name="imagen" onChange={handleChange} value={value.imagen}/>
+                        <input id="imagen" type="file" display="none" name="imagen" onChange={handleChange} value={value.imagen} />
                     </div>
 
                     <button onClick={handleSubmit}>CARGAR</button>

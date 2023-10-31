@@ -2,16 +2,21 @@ import axios from 'axios'
 import { API_URL } from '../consts/consts'
 
 const getByCategory = async (category) => {
-try {
-    const response = await axios.get(API_URL + 'productos/planta')
-    return response.data
-} catch (error) {
-    throw error
-}
+    try {
+        const response = await axios.get(API_URL + 'productos/planta')
+        return response.data
+    } catch (error) {
+        throw error
+    }
 }
 
-const getById = (id) => {
-
+const getProductoById = async (id) => {
+    try {
+        const response = await axios.get(API_URL + `productos/${id}`)
+        return response.data
+    } catch (error) {
+        throw error
+    }
 }
 
 const getAll = () => {
@@ -45,4 +50,4 @@ const deleteProducto = async (producto, ruta) => {
     }
 }
 
-export { getByCategory, getById, getAll, setProducto, updateProducto, deleteProducto }
+export { getByCategory, getAll, getProductoById, setProducto, updateProducto, deleteProducto }

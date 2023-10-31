@@ -19,6 +19,8 @@ function App() {
           <Route path='/' element={<CardCatContainer />} />
           <Route path='/productos/:cat' element={<CardContainer />} />
           <Route path='/formCarga' element={<FormCarga/>} />
+          <Route path='/formCarga/planta/:id' element={ <FormPlanta/> } />
+          <Route path='/formCarga/producto/:id' element={ <FormProducto/> } />
           <Route path='/formCarga/planta' element={ <FormPlanta/> } />
           <Route path='/formCarga/producto' element={ <FormProducto/> } />
         </Routes>

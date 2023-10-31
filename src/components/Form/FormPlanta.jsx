@@ -3,9 +3,11 @@ import "./FormPlanta.css"
 import { setProducto } from "../../services/bbdd"
 import { swalError, swalOk } from "../../services/swal"
 import { rutas } from "../../consts/consts"
+import { useParams } from "react-router-dom"
 
 const FormPlanta = () => {
 
+    const { id } = useParams()
     const defaultValue = {
         nombre: '',
         esSemilla: 0,
@@ -29,7 +31,7 @@ const FormPlanta = () => {
     const handleCheckChange = (e) => {
         setValue((prev) => ({
             ...prev,
-            esSemilla : e.target.checked ? 1 : 0
+            esSemilla: e.target.checked ? 1 : 0
         }))
     }
 
@@ -54,21 +56,21 @@ const FormPlanta = () => {
                 <div id="contenedorInputsPlanta">
 
                     <div id="categoria">
-                        <input type="text" name="nombre" placeholder="Nombre" onChange={handleChange} value={value.nombre}/>
+                        <input type="text" name="nombre" placeholder="Nombre" onChange={handleChange} value={value.nombre} />
                     </div>
 
                     <div id="categoriaSemilla">
                         <label>Semilla</label>
-                        <input type="checkbox" name="esSemilla" onChange={handleCheckChange} value={value.esSemilla}/>
+                        <input type="checkbox" name="esSemilla" onChange={handleCheckChange} value={value.esSemilla} />
                     </div>
 
 
                     <div id="categoria">
-                        <input type="text" name="especie" placeholder="Especie" onChange={handleChange} value={value.especie}/>
+                        <input type="text" name="especie" placeholder="Especie" onChange={handleChange} value={value.especie} />
                     </div>
 
                     <div id="categoria">
-                        <input type="text" name="genero" placeholder="Genero" onChange={handleChange} value={value.genero}/>
+                        <input type="text" name="genero" placeholder="Genero" onChange={handleChange} value={value.genero} />
                     </div>
 
                     {/* <div id="categoria">
@@ -76,7 +78,7 @@ const FormPlanta = () => {
                     </div> */}
 
                     <div id="categoria">
-                        <input type="number" name="precio" placeholder="Precio"  onChange={handleChange} value={value.precio}/>
+                        <input type="number" name="precio" placeholder="Precio" onChange={handleChange} value={value.precio} />
                     </div>
 
                     {/* <div id="categoriaImagen">

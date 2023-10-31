@@ -52,7 +52,6 @@ const CardContainer = () => {
                   </div>
                   <div className="botones">
                     <Link to="/formCarga"><button>Agregar</button></Link>
-                    <button>Modificar</button>
                     <button>Eliminar</button>
                   </div>
                 </>
