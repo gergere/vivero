@@ -8,12 +8,12 @@ const FormPlanta = () => {
 
     const defaultValue = {
         nombre: '',
-        esSemilla: false,
+        esSemilla: 0,
         especie: '',
         genero: '',
-        cantidad: '',
+        // cantidad: '',
         precio: '',
-        imagen: ''
+        // imagen: ''
     }
 
     const [value, setValue] = useState(defaultValue)
@@ -29,13 +29,13 @@ const FormPlanta = () => {
     const handleCheckChange = (e) => {
         setValue((prev) => ({
             ...prev,
-            esSemilla : e.target.checked
+            esSemilla : e.target.checked ? 1 : 0
         }))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setProducto(value, rutas.producto)
+        setProducto(value, rutas.productos)
             .then((res) => {
                 swalOk()
                 setValue(defaultValue)
@@ -71,18 +71,18 @@ const FormPlanta = () => {
                         <input type="text" name="genero" placeholder="Genero" onChange={handleChange} value={value.genero}/>
                     </div>
 
-                    <div id="categoria">
+                    {/* <div id="categoria">
                         <input type="number" name="cantidad" placeholder="Cantidad" onChange={handleChange} value={value.cantidad}/>
-                    </div>
+                    </div> */}
 
                     <div id="categoria">
                         <input type="number" name="precio" placeholder="Precio"  onChange={handleChange} value={value.precio}/>
                     </div>
 
-                    <div id="categoriaImagen">
+                    {/* <div id="categoriaImagen">
                         <label htmlFor="imagen">Presione AQUI para cargar una imagen</label>
                         <input id="imagen" name="imagen" type="file" display="none" onChange={handleChange} value={value.imagen}/>
-                    </div>
+                    </div> */}
 
                     <button onClick={handleSubmit}>CARGAR</button>
 

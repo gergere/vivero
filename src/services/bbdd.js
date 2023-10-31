@@ -3,7 +3,7 @@ import { API_URL } from '../consts/consts'
 
 const getByCategory = async (category) => {
 try {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    const response = await axios.get(API_URL + 'productos/planta')
     return response.data
 } catch (error) {
     throw error
@@ -20,7 +20,7 @@ const getAll = () => {
 
 const setProducto = async (producto, ruta) => {
     try {
-        const response = await axios.post(API_URL + ruta, producto)
+        const response = await axios.post(API_URL + ruta + '/plantas', producto)
         return response.data
     } catch (error) {
         throw error
@@ -29,7 +29,7 @@ const setProducto = async (producto, ruta) => {
 
 const updateProducto = async (prodEditado, ruta) => {
     try {
-        const response = await axios.put(API_URL + ruta, prodEditado)
+        const response = await axios.put(API_URL + ruta + '/plantas', prodEditado)
         return response.data
     } catch (error) {
         throw error
