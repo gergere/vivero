@@ -3,7 +3,7 @@ import "./FormPlanta.css"
 import { getPlantaById, setPlanta, updatePlanta } from "../../services/bbdd"
 import { swalError, swalOk } from "../../services/swal"
 import { rutas } from "../../consts/consts"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 const FormPlanta = () => {
 
@@ -16,6 +16,8 @@ const FormPlanta = () => {
     precio: '',
   }
 
+  const navigate = useNavigate()
+
   const [value, setValue] = useState(defaultValue)
 
   const handleChange = (e) => {
@@ -27,21 +29,29 @@ const FormPlanta = () => {
   }
 
   const handleCheckChange = (e) => {
+    console.log(e.target.checked)
     setValue((prev) => ({
       ...prev,
-      esSemilla: e.target.checked ? 1 : 0
+      esSemilla: !!e.target.checked ? 1 : 0
     }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (id) {
+      console.log("actualizando planta")
       updatePlanta(value, rutas.planta, id)
+        .then((res) => {
+          swalOk()
+          navigate("/")
+        })
+        .catch(error => swalError(error))
     } else {
       setPlanta(value, rutas.planta)
         .then((res) => {
           swalOk()
           setValue(defaultValue)
+          navigate("/")
           console.log(res)
         })
         .catch(error => swalError(error))
@@ -50,9 +60,10 @@ const FormPlanta = () => {
 
   useEffect(() => {
     // si id existe es porque esta cargado un producto para actualizar
+
     if (id) {
       getPlantaById(id).then((res) => {
-        setValue(JSON.parse(res))
+        setValue(res[0])
       })
     }
   }, [id, setValue])

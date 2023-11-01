@@ -8,7 +8,7 @@ const configKnex = {
     host: '127.0.0.1',
     port: 3306,
     user: 'root',
-    password: '86023',
+    password: 'alejandro1234',
     database: 'spd_vivero'
   }
 }
@@ -44,8 +44,11 @@ app.get('/categoria/:cat', async (req, res) => {
 
 app.get('/productos/:id', async (req, res) => {
   try {
+    
     const { id } = req.params
-    const result = await knex("producto").where('id_product', id)
+    console.log(id)
+    const result = await knex("producto").where('id_producto', id)
+    
     if (result) {
       res.status(201).json({ ...result });
     } else {
@@ -154,7 +157,6 @@ app.put('/productos/:id', async (req, res) => {
       tipo_producto: producto,
       caracteristicas,
       descripcion,
-      cantidad,
       precio_producto: parseFloat(precio),
     });
     if (result > 0) {

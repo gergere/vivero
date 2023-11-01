@@ -7,18 +7,18 @@ import { useNavigate } from 'react-router-dom'
 const ProductDetail = ({ prod, onClose }) => {
 
   const navigate = useNavigate()
-
+  const id = prod.id_planta ? prod.id_planta : prod.id_producto
   const handleEditing = () => {
 
     if (prod.descripcion) {
-      navigate(`/formCarga/producto/${prod.id}`)
+      navigate(`/formCarga/producto/${id}`)
     } else {
-      navigate(`/formCarga/planta/${prod.id}`)
+      navigate(`/formCarga/planta/${id}`)
     }
   }
 
   const handleDelete = () => {
-    deleteProducto(prod.id)
+    deleteProducto(id)
       .then(() => {
         swalOk()
         onClose()
@@ -34,7 +34,7 @@ const ProductDetail = ({ prod, onClose }) => {
           <h2 className='h2PD'>Detalles del Producto</h2>
           <div className='contenedorDetail'>
             <div className='productDetail'>
-              <p>id: {prod.id}</p>
+              <p>id: {id}</p>
               <h2>{prod.nombre}</h2>
               {
                 prod.descripcion ?

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import "./FormProducto.css"
-import { getProductoById, setProducto } from "../../services/bbdd"
+import { getProductoById, setProducto, updateProducto } from "../../services/bbdd"
 import { rutas } from "../../consts/consts"
 import { swalError, swalOk } from "../../services/swal"
 import { useParams } from "react-router-dom"
@@ -13,7 +13,6 @@ const FormProducto = () => {
         producto: '',
         caracteristicas: '',
         descripcion: '',
-        cantidad: '',
         precio: '',
         imagen: ''
     })
@@ -30,8 +29,15 @@ const FormProducto = () => {
         e.preventDefault()
         // si id existe es porque estamos editando un producto que ya existe
         if (id) {
+            console.log(value)
             updateProducto(value, rutas.productos, id)
-        // sino creamos un producto nuevo
+                .then((res) => {
+                    swalOk()
+                    setValue(defaultValue)
+                    console.log(res)
+                })
+                .catch(error => swalError(error))
+            // sino creamos un producto nuevo
         } else {
             setProducto(value, rutas.productos)
                 .then((res) => {
@@ -47,7 +53,19 @@ const FormProducto = () => {
         // si id existe es porque esta cargado un producto para actualizar
         if (id) {
             getProductoById(id).then((res) => {
-                setValue(JSON.parse(res))
+                res = res[0]
+                const r = {
+                    descripcion: res.descripcion,
+                    id: res.id_producto,
+                    nombre: res.nombre_producto,
+                    precio: res.precio_producto,
+                    producto: res.tipo_producto,
+                    caracteristicas: res.caracteristicas
+                }
+                setValue((prev) => ({
+                    ...prev,
+                    ...r
+                }))
             })
         }
     }, [id, setValue])
@@ -69,9 +87,9 @@ const FormProducto = () => {
                     <div className="categoriaProducto">
                         <select name="producto" onChange={handleChange} value={value.producto}>
                             <option value="">Tipo de producto</option>
-                            <option value="Herramientas">Herramientas</option>
-                            <option value="Macetas">Macetas</option>
-                            <option value="Accesorios">Accesorios</option>
+                            <option value="herramientas">Herramientas</option>
+                            <option value="macetas">Macetas</option>
+                            <option value="accesorios">Accesorios</option>
                         </select>
                     </div>
 
@@ -84,9 +102,9 @@ const FormProducto = () => {
                         <textarea type="text" placeholder="Descripcion" name="descripcion" onChange={handleChange} value={value.descripcion} />
                     </div>
 
-                    <div className="categoriaProducto">
+                    {/* <div className="categoriaProducto">
                         <input type="number" placeholder="Cantidad" name="cantidad" onChange={handleChange} value={value.cantidad} />
-                    </div>
+                    </div> */}
 
                     <div className="categoriaProducto">
                         <input type="number" placeholder="Precio" name="precio" onChange={handleChange} value={value.precio} />

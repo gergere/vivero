@@ -37,7 +37,9 @@ const setProducto = async (producto, ruta) => {
 }
 
 const updateProducto = async (prodEditado, ruta, id) => {
+
     try {
+        console.log(API_URL + ruta + `/${id}`)
         const response = await axios.put(API_URL + ruta + `/${id}`, prodEditado)
         return response.data
     } catch (error) {
@@ -75,8 +77,9 @@ const setPlanta = async (producto, ruta) => {
 }
 
 const updatePlanta = async (prodEditado, ruta, id) => {
+
     try {
-        const response = await axios.put(API_URL + ruta + `/${id}`, prodEditado)
+        const response = await axios.put(API_URL + ruta + `/${id}`, ({ ...prodEditado, es_semilla: prodEditado.esSemilla }))
         return response.data
     } catch (error) {
         throw error

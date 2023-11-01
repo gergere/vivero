@@ -14,10 +14,10 @@ const CardContainer = () => {
   const { cat } = useParams()
 
   useEffect(() => {
-    getByCategory()
+    getByCategory(cat)
       .then((res) => setData(res))
       .catch((error) => swalError(error))
-  }, [selected])
+  }, [selected, cat])
 
   const handleClick = (prod) => {
     setSelected(prod)
