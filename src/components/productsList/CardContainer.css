@@ -1,5 +1,5 @@
 h1{
-    color: darkolivegreen;
+    color: black;
     padding: 20px;
     text-align: center;
 }
@@ -8,36 +8,13 @@ h1{
     width: 100%;
     background-color: darkseagreen;
     display: grid;
-    grid-gap: 20px;
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 5%;
     justify-content: center;
     align-content: center;
     padding: 5rem;
 }
 
-.contenedor h4{
-    color: rgb(2, 39, 2);
-}
-
-.contenedor div{
-    margin: auto auto;
-    padding: 5rem;
-    width: 300px;
-    height: 300px;
-    background-color: rgb(204, 235, 204);
-    border: 1px solid green;
-    display: grid;
-    grid-gap: 10px;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.contenedor div div{
-    width: 40px;
-    height: 40px;
-    background-color: darkolivegreen;
-}
 
 .botones{
     background-color: darkolivegreen;
