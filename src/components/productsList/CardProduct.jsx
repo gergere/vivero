@@ -7,9 +7,9 @@ const CardProduct = ({producto, onClick}) => {
       <h4>{producto.nombre.toUpperCase()}</h4>
       <h5>{producto.genero}</h5>
       <p>Precio: ${ producto.precio }</p>
-          {/* <picture>
+          <picture>
               <img src={producto.imagen} alt="" />
-          </picture> */}
+          </picture> 
           <p>{producto.title}</p>
     </div>
   )

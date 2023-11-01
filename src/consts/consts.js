@@ -1,6 +1,6 @@
 export const rutas = {
     productos: 'productos',
-    planta: 'planta'
+    planta: 'plantas'
 }
 
 export const API_URL = 'http://localhost:8080/'

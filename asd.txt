@@ -1,0 +1,13 @@
+Otro problema que se presentó durante el desarrollo del proyecto fue el envío de un objeto formdata con axios.
+ Un objeto formdata es una forma de enviar datos en formato clave-valor, incluyendo archivos, mediante peticiones HTTP. 
+ En nuestro proyecto, usamos un objeto formdata para enviar la información de una planta junto con su imagen al servidor.
+
+Para crear el objeto formdata, usamos la clase FormData de JavaScript y le agregamos los campos correspondientes a la planta y agregamos el archivo de la imagen en ambos casos usando el método append. 
+ Luego, usamos la librería axios para hacer una petición POST al servidor, pasando el objeto formdata como dato y configurando la cabecera Content-Type
+como multipart/form-data.
+
+ En el servidor, tenemos un controlador que recibe la petición POST y guarda la información de la planta en la base de datos.
+
+ Al intentar enviar la petición axios con el objeto formdata, el servidor nos devolvía un error 415.
+ Este error significa que el tipo de contenido que estamos enviando no es compatible con el que espera el servidor. 
+ Intentamos diferentes formas de configurar y hacer el formdata pero lamentablemente no pudimos encontrar una solución a este problema.

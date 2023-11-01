@@ -8,12 +8,11 @@ const FormPlanta = () => {
 
   const defaultValue = {
     nombre: '',
-    esSemilla: 0,
+    esSemilla: false, 
     especie: '',
     genero: '',
-    // cantidad: '',
     precio: '',
-    // imagen: ''
+    imagen: '' 
   }
 
   const [value, setValue] = useState(defaultValue)
@@ -26,16 +25,29 @@ const FormPlanta = () => {
     }))
   }
 
-  const handleCheckChange = (e) => {
+  const handleFileChange = (e) => {
+      setValue((prev) => ({
+          ...prev,
+          imagen: e.target.files[0]
+      }))
+  }
+  const handleCheckChange = (e) =>{
     setValue((prev) => ({
       ...prev,
-      esSemilla: e.target.checked ? 1 : 0
+      esSemilla: e.target.checked 
     }))
+  
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
-    setProducto(value, rutas.productos)
+    
+    // Crear un objeto FormData con los datos de la planta y el archivo de imagen
+    const formData = new FormData()
+    formData.append('planta',value)
+    formData.append('file', value.imagen)
+
+
+    setProducto(formData, rutas.planta)
       .then((res) => {
         swalOk()
         setValue(defaultValue)
@@ -59,7 +71,7 @@ const FormPlanta = () => {
 
           <div id="categoriaSemilla">
             <label>Semilla</label>
-            <input type="checkbox" name="esSemilla" onChange={handleCheckChange} value={value.esSemilla} />
+            <input type="checkbox" name="esSemilla" onChange={handleCheckChange} checked={value.esSemilla} />
           </div>
 
 
@@ -71,18 +83,14 @@ const FormPlanta = () => {
             <input type="text" name="genero" placeholder="Genero" onChange={handleChange} value={value.genero} />
           </div>
 
-          {/* <div id="categoria">
-                        <input type="number" name="cantidad" placeholder="Cantidad" onChange={handleChange} value={value.cantidad}/>
-                    </div> */}
-
           <div id="categoria">
             <input type="number" name="precio" placeholder="Precio" onChange={handleChange} value={value.precio} />
           </div>
 
-          {/* <div id="categoriaImagen">
+          <div id="categoriaImagen">
                         <label htmlFor="imagen">Presione AQUI para cargar una imagen</label>
-                        <input id="imagen" name="imagen" type="file" display="none" onChange={handleChange} value={value.imagen}/>
-                    </div> */}
+                        <input id="imagen" name="imagen" type="file" onChange={handleFileChange} /> 
+                    </div>
 
           <button onClick={handleSubmit}>CARGAR</button>
 
