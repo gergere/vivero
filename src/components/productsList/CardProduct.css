@@ -1,0 +1,14 @@
+.producto {
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.producto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px white;
+}
+
+.producto h5 {
+    text-align: center;
+}
