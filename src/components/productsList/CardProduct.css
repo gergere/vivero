@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .producto{
     margin: auto;
     margin-bottom: 25%;
@@ -35,4 +36,19 @@
     width: 80%;
     font-weight: 600;
     margin: auto;
+=======
+.producto {
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.producto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px white;
+}
+
+.producto h5 {
+    text-align: center;
+>>>>>>> 18c622a9421f3c1f9f54e97f7b0c6c7f1cae861f
 }
