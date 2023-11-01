@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .producto{
     margin: auto;
     margin-bottom: 25%;
@@ -6,18 +5,17 @@
     height: 300px;
     background-color: rgb(204, 235, 204);
     border-radius: 30px;
-    box-shadow: 0 0.3rem 0.5rem black;
+    box-shadow: 0 0.3rem 0.5rem greenyellow;
     display: grid;
     grid-template-rows: 1fr 2fr 1fr;
     align-items: center;
     text-align: center;
-    
+    transition: transform 0.5s;
 }
 
 .producto:hover{
     cursor: pointer;
-    transition: transform 0.5s;
-    transform: scale(1.3);
+    transform: scale(1.05);
 }
 
 .producto h4{
@@ -32,12 +30,14 @@
 }
 
 .producto p{
+
     text-transform: capitalize;
     width: 80%;
     font-weight: 600;
     margin: auto;
-=======
-.producto {
+}
+
+/* .producto {
     border-radius: 10px;
     transition: 0.3s;
     cursor: pointer;
@@ -50,5 +50,4 @@
 
 .producto h5 {
     text-align: center;
->>>>>>> 18c622a9421f3c1f9f54e97f7b0c6c7f1cae861f
-}
+} */
