@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-app.get('/productos/:cat', async (req, res) => {
+app.get('/categoria/:cat', async (req, res) => {
   try {
     const { cat } = req.params
     const response = await knex.select('*').from(cat)
@@ -31,7 +31,41 @@ app.get('/productos/:cat', async (req, res) => {
   }
 })
 
-app.post('/productos/plantas', async (req, res) => {
+////////////////GET/////////////////
+
+app.get('/productos/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const result = await knex("producto").where('id_product', id)
+    if (result) {
+      res.status(201).json( { ...result });
+    } else {
+      res.status(404).json({ error: 'Dato no encontrado' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Hubo un error al cargar los datos en la base de datos.' });
+  }
+})
+
+app.get('/planta/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const result = await knex("planta").where('id_planta', id)
+    if (result) {
+      res.status(201).json( { ...result });
+    } else {
+      res.status(404).json({ error: 'Dato no encontrado' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Hubo un error al cargar los datos en la base de datos.' });
+  }
+})
+
+
+////////////////POST////////////////
+app.post('/planta', async (req, res) => {
   try {
     const { nombre, especie, genero, precio, esSemilla } = req.body;
     const nuevoRegistro = await knex('planta').insert({
@@ -48,11 +82,36 @@ app.post('/productos/plantas', async (req, res) => {
   }
 })
 
-app.put('/productos/:cat', async (req, res) => {
+app.post('/productos', async (req, res) => {
   try {
-    const { cat } = req.params
-    const { id_planta, nombre, especie, genero, precio, es_semilla } = req.body;
-    const result = await knex(cat).where({ id_planta }).update({
+    const {
+      nombre,
+      producto,
+      caracteristicas,
+      descripcion,
+      cantidad,
+      precio
+    } = req.body;
+    const nuevoRegistro = await knex('producto').insert({
+      nombre_producto: nombre,
+      tipo_producto: producto,
+      caracteristicas,
+      descripcion,
+      precio_producto: parseFloat(precio),
+    });
+    res.status(201).json({ mensaje: 'Datos cargados correctamente', nuevoRegistro });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Hubo un error al cargar los datos en la base de datos.' });
+  }
+})
+
+////////////////PUT////////////////
+app.put('/planta/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const { nombre, especie, genero, precio, es_semilla } = req.body;
+    const result = await knex("planta").where('id_planta', id).update({
       nombre,
       especie,
       genero,
@@ -70,10 +129,41 @@ app.put('/productos/:cat', async (req, res) => {
   }
 })
 
-app.delete('/productos/:cat/:id', async (req, res) => {
+app.put('/productos/:id', async (req, res) => {
   try {
-    const { cat, id } = req.params
-    const result = await knex(cat).where({ id_planta: id }).del()
+    const { id } = req.params
+    const {
+      nombre,
+      producto,
+      caracteristicas,
+      descripcion,
+      cantidad,
+      precio
+    } = req.body;
+    const result = await knex("producto").where('id_producto', id).update({
+      nombre_producto: nombre,
+      tipo_producto: producto,
+      caracteristicas,
+      descripcion,
+      cantidad,
+      precio_producto: parseFloat(precio),
+    });
+    if (result > 0) {
+      res.status(201).json({ mensaje: 'Datos actualizados correctamente' });
+    } else {
+      res.status(404).json({ error: 'Dato no encontrado' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Hubo un error al cargar los datos en la base de datos.' });
+  }
+})
+
+////////////////DELETE////////////////
+app.delete('/productos/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const result = await knex("producto").where('id_planta', id).del()
     if (result > 0) {
       res.json({ mensaje: 'Registro eliminado correctamente' });
     } else {
@@ -85,6 +175,20 @@ app.delete('/productos/:cat/:id', async (req, res) => {
   }
 })
 
+app.delete('/planta/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const result = await knex("planta").where('id_producto', id).del()
+    if (result > 0) {
+      res.json({ mensaje: 'Registro eliminado correctamente' });
+    } else {
+      res.status(404).json({ error: 'Registro no encontrado' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Hubo un error al cargar los datos en la base de datos.' });
+  }
+})
 
 const server = app.listen(8080, () => console.log('Server ready on 8080'))
 server.on('error', (e) => console.log('Error en servidor: ', e))

@@ -30,7 +30,7 @@ const FormProducto = () => {
         e.preventDefault()
         // si id existe es porque estamos editando un producto que ya existe
         if (id) {
-            updateProducto(value, rutas.productos)
+            updateProducto(value, rutas.productos, id)
         // sino creamos un producto nuevo
         } else {
             setProducto(value, rutas.productos)
@@ -44,6 +44,7 @@ const FormProducto = () => {
     }
 
     useEffect(() => {
+        // si id existe es porque esta cargado un producto para actualizar
         if (id) {
             getProductoById(id).then((res) => {
                 setValue(JSON.parse(res))

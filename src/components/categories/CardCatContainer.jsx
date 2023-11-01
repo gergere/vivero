@@ -16,7 +16,7 @@ const CardCatContainer = () => {
                             <div className="caja">
                             <CardCategory key={i} category={categ} img={categ.toLowerCase()} />
                             </div>
-                        </Link >
+                        </Link>
                     );
                 }else{
                     return (
@@ -24,7 +24,7 @@ const CardCatContainer = () => {
                             <div className="caja">
                             <CardCategory key={i} category={categ} img={categ.toLowerCase()} />
                             </div>
-                        </Link >
+                        </Link>
                     );
                 }
             })}

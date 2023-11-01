@@ -1,22 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./FormPlanta.css"
-import { setProducto } from "../../services/bbdd"
+import { getPlantaById, setPlanta, updatePlanta } from "../../services/bbdd"
 import { swalError, swalOk } from "../../services/swal"
 import { rutas } from "../../consts/consts"
 import { useParams } from "react-router-dom"
 
 const FormPlanta = () => {
 
-    const { id } = useParams()
-    const defaultValue = {
-        nombre: '',
-        esSemilla: 0,
-        especie: '',
-        genero: '',
-        // cantidad: '',
-        precio: '',
-        // imagen: ''
-    }
+  const { id } = useParams()
+  const defaultValue = {
+    nombre: '',
+    esSemilla: 0,
+    especie: '',
+    genero: '',
+    precio: '',
+  }
 
   const [value, setValue] = useState(defaultValue)
 
@@ -37,14 +35,27 @@ const FormPlanta = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setProducto(value, rutas.productos)
-      .then((res) => {
-        swalOk()
-        setValue(defaultValue)
-        console.log(res)
-      })
-      .catch(error => swalError(error))
+    if (id) {
+      updatePlanta(value, rutas.planta, id)
+    } else {
+      setPlanta(value, rutas.planta)
+        .then((res) => {
+          swalOk()
+          setValue(defaultValue)
+          console.log(res)
+        })
+        .catch(error => swalError(error))
+    }
   }
+
+  useEffect(() => {
+    // si id existe es porque esta cargado un producto para actualizar
+    if (id) {
+      getPlantaById(id).then((res) => {
+        setValue(JSON.parse(res))
+      })
+    }
+  }, [id, setValue])
 
   return (
 
