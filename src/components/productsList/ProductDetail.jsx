@@ -72,12 +72,13 @@ const ProductDetail = ({ prod, onClose }) => {
           </>
         ) : (
           <>
-            <h2 className='h2PD'>Product detail</h2>
+            <h2 className='h2PD'>Detalles del Producto</h2>
             <div className='contenedorDetail'>
               <div className='productDetail'>
-                <h2>{prod.nombre}</h2>
                 <p>id: {prod.id}</p>
+                <h2>{prod.nombre}</h2>
                 <p>Género: {prod.genero}</p>
+                <p>Especie: {prod.especie}</p>
                 <p>Precio: $ {prod.precio}</p>
                 <div>
                   <Button onClick={onClose} texto="Volver" color="green" />
