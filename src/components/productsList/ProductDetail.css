@@ -1,0 +1,25 @@
+.contenedorDetail {
+    width: 60%;
+    background-color: #91c085;
+    border: 2ps solid #6a8d61;
+    margin: 50px auto;
+    border-radius: 30px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.productDetail {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.h2PD {
+    text-align: center;
+    margin: 30px;
+}

@@ -17,11 +17,11 @@
 
 #navbarDiv ul li {
     margin: 10px;
-     color: rgb(2, 39, 2);
+     color: black;
 
 }
 
 #navbarDiv ul li:hover {
-    color: rgb(219, 243, 219);
+    color: white;
 }
 

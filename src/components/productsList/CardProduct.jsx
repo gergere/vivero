@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import './CardProduct.css'
 
-import React from 'react'
 
 const CardProduct = ({producto, onClick}) => {
 
@@ -17,10 +16,12 @@ const CardProduct = ({producto, onClick}) => {
 
   return (
     <div className='producto' onClick={()=>onClick(producto)}>
-        <h4>{producto.id}</h4>
-          <picture>
+      <h4>{producto.nombre.toUpperCase()}</h4>
+      <h5>{producto.genero}</h5>
+      <p>Precio: ${ producto.precio }</p>
+          {/* <picture>
               <img src={producto.imagen} alt="" />
-          </picture>
+          </picture> */}
           <p>{producto.title}</p>
           <button onClick={handleURL} >Modificar</button>
           <button>Modificar</button>

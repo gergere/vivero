@@ -24,6 +24,7 @@
 }
 
 #contenedorPrincipalCarga h4{
+    text-align: center;
     color: black;
     background-color: darkseagreen;
     width: 300px;

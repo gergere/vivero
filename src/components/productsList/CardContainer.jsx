@@ -17,7 +17,7 @@ const CardContainer = () => {
     getByCategory()
       .then((res) => setData(res))
       .catch((error) => swalError(error))
-  }, [])
+  }, [selected])
 
   const handleClick = (prod) => {
     setSelected(prod)
@@ -49,10 +49,6 @@ const CardContainer = () => {
                         <CardProduct key={prod.id} producto={prod} onClick={handleClick} />
                       ))
                     }
-                  </div>
-                  <div className="botones">
-                    <Link to="/formCarga"><button>Agregar</button></Link>
-                    <button>Eliminar</button>
                   </div>
                 </>
               )

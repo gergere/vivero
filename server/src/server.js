@@ -8,7 +8,7 @@ const configKnex = {
     host: '127.0.0.1',
     port: 3306,
     user: 'root',
-    password: '1234',
+    password: '86023',
     database: 'spd_vivero'
   }
 }
@@ -51,18 +51,33 @@ app.post('/productos/plantas', async (req, res) => {
 app.put('/productos/:cat', async (req, res) => {
   try {
     const { cat } = req.params
-    const { id, nombre, especie, genero, precio, esSemilla } = req.body;
-    const result = await knex(cat).where({ id_planta: id }).update({
+    const { id_planta, nombre, especie, genero, precio, es_semilla } = req.body;
+    const result = await knex(cat).where({ id_planta }).update({
       nombre,
       especie,
       genero,
       precio: parseFloat(precio),
-      es_semilla: parseInt(esSemilla)
+      es_semilla: parseInt(es_semilla)
     });
     if (result > 0) {
       res.status(201).json({ mensaje: 'Datos actualizados correctamente' });
     } else {
       res.status(404).json({ error: 'Dato no encontrado' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Hubo un error al cargar los datos en la base de datos.' });
+  }
+})
+
+app.delete('/productos/:cat/:id', async (req, res) => {
+  try {
+    const { cat, id } = req.params
+    const result = await knex(cat).where({ id_planta: id }).del()
+    if (result > 0) {
+      res.json({ mensaje: 'Registro eliminado correctamente' });
+    } else {
+      res.status(404).json({ error: 'Registro no encontrado' });
     }
   } catch (error) {
     console.error(error);

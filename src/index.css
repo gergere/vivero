@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
  /*   background-color: rgb(192, 231, 192);  */
- background-color: rgb(204, 235, 204);
+ background-color: white;
 
 }
 
@@ -20,4 +20,10 @@
 
 .logo {
   width: 100px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

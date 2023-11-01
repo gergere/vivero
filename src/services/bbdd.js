@@ -2,12 +2,18 @@ import axios from 'axios'
 import { API_URL } from '../consts/consts'
 
 const getByCategory = async (category) => {
-    try {
-        const response = await axios.get(API_URL + 'productos/planta')
-        return response.data
-    } catch (error) {
-        throw error
-    }
+try {
+    const response = await axios.get(API_URL + 'productos/planta')
+    let res = response.data?.map((el) => (
+        {
+        ...el,
+        id: el.id_planta
+
+        }))
+    return res
+} catch (error) {
+    throw error
+}
 }
 
 const getProductoById = async (id) => {
@@ -34,16 +40,16 @@ const setProducto = async (producto, ruta) => {
 
 const updateProducto = async (prodEditado, ruta) => {
     try {
-        const response = await axios.put(API_URL + ruta + '/plantas', prodEditado)
+        const response = await axios.put(API_URL + ruta + '/planta', prodEditado)
         return response.data
     } catch (error) {
         throw error
     }
 }
 
-const deleteProducto = async (producto, ruta) => {
+const deleteProducto = async (id) => {
     try {
-        const response = await axios.delete(API_URL + ruta, producto)
+        const response = await axios.delete(API_URL + 'productos/planta/' + id)
         return response.data
     } catch (error) {
         throw error
