@@ -21,9 +21,18 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.get('/categoria/:cat', async (req, res) => {
+
+  const { cat } = req.params
+
   try {
-    const { cat } = req.params
-    const response = await knex.select('*').from(cat)
+    let response;
+    if (cat == "plantas" || cat == "semillas") {
+      response = cat == "plantas"
+        ? (await knex.select('*').from("planta").where('es_semilla', 0))
+        : (await knex.select('*').from("planta").where('es_semilla', 1))
+    } else {
+      response = await knex.select('*').from("producto").where('tipo_producto', cat)
+    }
     res.status(201).json(response)
   } catch (error) {
     console.error(error);
@@ -38,7 +47,7 @@ app.get('/productos/:id', async (req, res) => {
     const { id } = req.params
     const result = await knex("producto").where('id_product', id)
     if (result) {
-      res.status(201).json( { ...result });
+      res.status(201).json({ ...result });
     } else {
       res.status(404).json({ error: 'Dato no encontrado' });
     }
@@ -53,7 +62,7 @@ app.get('/planta/:id', async (req, res) => {
     const { id } = req.params
     const result = await knex("planta").where('id_planta', id)
     if (result) {
-      res.status(201).json( { ...result });
+      res.status(201).json({ ...result });
     } else {
       res.status(404).json({ error: 'Dato no encontrado' });
     }

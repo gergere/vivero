@@ -7,7 +7,6 @@ const getByCategory = async (category) => {
         let res = response.data?.map((el) => (
             {
                 ...el,
-                id: el.id_planta
             }))
         return res
     } catch (error) {
