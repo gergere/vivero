@@ -28,8 +28,7 @@ const getAll = () => {
 const setProducto = async (producto,ruta) => {
 
     try {
-        console.log(producto)
-        const response = await axios.post(API_URL +ruta, producto, {headers:{"content-type":"multipart/form-data"}})
+        const response = await axios.post(API_URL +ruta, producto, {headers:{"Content-Type":"multipart/form-data"}})
         return response.data
     } catch (error) {
         throw error

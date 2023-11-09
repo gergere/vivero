@@ -12,11 +12,11 @@ const FormPlanta = () => {
     especie: '',
     genero: '',
     precio: '',
-    imagen: '' 
+//    imagen: null
   }
-
+  const defaultImage = null
   const [value, setValue] = useState(defaultValue)
-
+  const [imageValue, setImageValue] = useState(defaultImage)
   const handleChange = (e) => {
     const { name, value } = e.target
     setValue((prev) => ({
@@ -26,10 +26,9 @@ const FormPlanta = () => {
   }
 
   const handleFileChange = (e) => {
-      setValue((prev) => ({
-          ...prev,
-          imagen: e.target.files[0]
-      }))
+    console.log(e.target.files[0])  
+    setImageValue(e.target.files[0])
+      
   }
   const handleCheckChange = (e) =>{
     setValue((prev) => ({
@@ -42,9 +41,14 @@ const FormPlanta = () => {
     e.preventDefault()
     
     // Crear un objeto FormData con los datos de la planta y el archivo de imagen
-    const formData = new FormData()
-    formData.append('planta',value)
-    formData.append('file', value.imagen)
+    let formData = new FormData()
+    const valueJSON = JSON.stringify(value)
+    formData.append('planta',valueJSON)
+    console.log(value)
+    formData.append('file', imageValue, imageValue.name)
+    for (const pair of formData.entries()) {
+      console.log(pair);}
+
 
 
     setProducto(formData, rutas.planta)

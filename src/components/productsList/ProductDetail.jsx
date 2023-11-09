@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { deleteProducto, updateProducto } from '../../services/bbdd'
 import { swalError, swalOk } from '../../services/swal'
